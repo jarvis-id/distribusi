@@ -13,7 +13,7 @@
 ---
 
 ### 📖 Deskripsi Proyek
-**LaporDok** adalah blueprint aplikasi web *Progressive Web App* (PWA) yang dirancang untuk membantu teknisi lapangan dalam melakukan pelaporan hasil kerja secara digital. Aplikasi ini berfokus pada validitas data menggunakan fitur kamera berbasis lokasi (GPS) untuk memastikan setiap pekerjaan terdokumentasi dengan akurat.
+**Aplikasi Distribusi** adalah blueprint aplikasi web *Progressive Web App* (PWA) yang dirancang untuk membantu teknisi lapangan dalam melakukan pelaporan hasil kerja secara digital. Aplikasi ini berfokus pada validitas data menggunakan fitur kamera berbasis lokasi (GPS) untuk memastikan setiap pekerjaan terdokumentasi dengan akurat.
 
 ---
 
