@@ -1,7 +1,7 @@
 {
-  "name": "Dokumentasi Kinerja",
-  "short_name": "LapDok",
-  "description": "Dokumentasi Kinerja",
+  "name": "Distribusi",
+  "short_name": "ApDi",
+  "description": "Aplikasi Distribusi",
   "start_url": "index.html",
   "display": "standalone",
   "background_color": "#ffffff",
