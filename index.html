@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DIS-NRW - Distribusi Air & Pengendalian NRW</title>
+  <meta name="description" content="Aplikasi Dokumentasi Kinerja Lapangan Distribusi Air & Pengendalian NRW PDAM">
+  <meta name="theme-color" content="#005F8E">
+  <link rel="manifest" href="assets/manifest.json">
+  <link rel="icon" href="assets/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="DIS-NRW">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/auth-guard.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localforage.min.js"></script>
+  <script src="js/jarvis.js"></script>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="navbar-inner" style="display:flex; align-items:center; justify-content:space-around; width:100%;">
+    <a href="index.html" class="active">
+      <span class="nav-icon">🏠</span> Beranda
+    </a>
+    <a href="pages/tampildata.html">
+      <span class="nav-icon">📂</span> Riwayat
+    </a>
+    <a href="javascript:void(0)" onclick="logoutUser()" title="Keluar Akun">
+      <span class="nav-icon">🚪</span> Keluar
+    </a>
+  </div>
+</nav>
+
+<div class="app-header">
+  <img src="assets/icons/logo.png" alt="DIS-NRW Logo" class="header-logo" style="width:72px; height:72px; background:white; padding:4px;">
+  <div class="header-title" style="font-size:22px;">DIS-NRW</div>
+  <div class="header-sub" style="font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.5px;">Distribusi Air & Pengendalian NRW</div>
+</div>
+
+<div class="main-content">
+
+  <!-- Live counter -->
+  <div class="live-card">
+    <div style="display:flex;align-items:center;">
+      <div class="live-dot"></div>
+      <span style="font-size:12px;font-weight:600;color:var(--text2)">Sistem Aktif</span>
+    </div>
+    <span style="font-size:11px;color:var(--text3)" id="tanggal-hari-ini"></span>
+  </div>
+
+  <!-- PWA Install Banner -->
+  <div id="pwa-install-banner" style="display:none; background:linear-gradient(135deg, #005F8E 0%, #0084FF 100%); color:white; border-radius:var(--radius); padding:12px 14px; margin-bottom:14px; box-shadow:0 4px 12px rgba(0,95,142,0.25); align-items:center; justify-content:space-between; gap:10px;">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div id="pwa-banner-icon" style="font-size:24px;">📲</div>
+      <div>
+        <div id="pwa-banner-title" style="font-weight:700; font-size:13px;">Pasang Aplikasi DIS-NRW</div>
+        <div id="pwa-banner-sub" style="font-size:11px; opacity:0.9;">Bisa dibuka langsung dari Layar Utama HP & offline</div>
+      </div>
+    </div>
+    <button id="btn-pwa-install" style="background:#FFF; color:#005F8E; border:none; border-radius:6px; font-weight:800; font-size:11px; padding:7px 14px; cursor:pointer; flex-shrink:0; box-shadow:0 2px 6px rgba(0,0,0,0.15);">
+      Install
+    </button>
+  </div>
+
+  <div class="section-label">Pilih Jenis Pekerjaan</div>
+
+  <!-- JOB CARDS -->
+  <div class="job-cards">
+
+    <a class="job-card card-apel" href="pages/form-apel.html">
+      <div class="job-card-icon">🎖️</div>
+      <div class="job-card-body">
+        <div class="job-card-title">Apel Pagi / Rapat / Upacara</div>
+        <div class="job-card-sub">Dokumentasi kehadiran apel & rapat</div>
+      </div>
+      <div class="job-card-badge">1 Foto</div>
+    </a>
+
+    <a class="job-card card-tekanan" href="pages/form-uji-tekanan.html">
+      <div class="job-card-icon">🔧</div>
+      <div class="job-card-body">
+        <div class="job-card-title">Uji Tekanan Air Pada SR</div>
+        <div class="job-card-sub">5 titik ukur: Terdekat, Menengah, Terjauh, Terendah, Tertinggi</div>
+      </div>
+      <div class="job-card-badge">5 Foto</div>
+    </a>
+
+    <a class="job-card card-valve" href="pages/form-valve.html">
+      <div class="job-card-icon">🔩</div>
+      <div class="job-card-body">
+        <div class="job-card-title">Buka Tutup Valve</div>
+        <div class="job-card-sub">Dokumentasi pembukaan & penutupan valve</div>
+      </div>
+      <div class="job-card-badge">Bebas</div>
+    </a>
+
+    <a class="job-card card-kebocoran" href="pages/form-perbaikan.html">
+      <div class="job-card-icon">🚰</div>
+      <div class="job-card-body">
+        <div class="job-card-title">Perbaikan Kebocoran Pipa & Valve</div>
+        <div class="job-card-sub">Pelaksanaan perbaikan pipa instalasi</div>
+      </div>
+      <div class="job-card-badge">3 Foto</div>
+    </a>
+
+    <a class="job-card card-tugaslain" href="pages/form-tugaslain.html">
+      <div class="job-card-icon">📋</div>
+      <div class="job-card-body">
+        <div class="job-card-title">Tugas Lain-lain Perusahaan</div>
+        <div class="job-card-sub">Tugas tambahan di luar tupoksi utama</div>
+      </div>
+      <div class="job-card-badge">3 Foto</div>
+    </a>
+
+    <a class="job-card card-status" href="pages/status.html">
+      <div class="job-card-icon">📡</div>
+      <div class="job-card-body">
+        <div class="job-card-title">Status Realtime Lapangan</div>
+        <div class="job-card-sub">Monitoring cuaca, suhu, GPS & internet</div>
+      </div>
+      <div class="job-card-badge">Live</div>
+    </a>
+
+  </div>
+
+  <!-- Arsip -->
+  <a class="archive-link" href="pages/tampildata.html">
+    <div>
+      <div class="archive-link-text">📂 Riwayat Laporan</div>
+      <div class="archive-link-sub">Lihat, cetak, dan kelola laporan tersimpan</div>
+    </div>
+    <div class="archive-link-arrow">›</div>
+  </a>
+
+  <!-- Info -->
+  <div style="background:white;border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;">
+    <div style="font-size:12px;font-weight:700;color:var(--primary);margin-bottom:10px;">ℹ️ Tentang DIS-NRW</div>
+    <p style="font-size:12px;color:var(--text2);line-height:1.7;">
+      <strong>DIS-NRW</strong> adalah aplikasi dokumentasi kinerja lapangan untuk Divisi <strong>Distribusi Air & Pengendalian NRW (Non-Revenue Water)</strong> PDAM. 
+      Dilengkapi GPS watermark otomatis, pratinjau peta satelit (Google Hybrid), panduan suara, dan ekspor laporan PDF format A4 presisi.
+    </p>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<div style="text-align:center;padding:20px 16px;font-size:11px;color:var(--text3);">
+  <div style="margin-bottom:6px;">
+    <a href="pages/panduan.html" style="color:var(--primary);text-decoration:none;margin:0 10px;">Panduan</a>
+    <a href="pages/privacy.html" style="color:var(--primary);text-decoration:none;margin:0 10px;">Privasi</a>
+  </div>
+  DIS-NRW © 2026 · Distribusi Air & Pengendalian NRW PDAM
+</div>
+
+<script>
+  // ============================================================
+  // PWA SERVICE WORKER & INSTALL PROMPT (Mobile & Desktop)
+  // ============================================================
+  let deferredPrompt = null;
+  const pwaBanner = document.getElementById('pwa-install-banner');
+  const btnInstall = document.getElementById('btn-pwa-install');
+  const isDesktop = !/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // Cek apakah aplikasi sudah dalam mode Standalone (terpasang)
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+  if (isDesktop) {
+    const iconEl = document.getElementById('pwa-banner-icon');
+    const titleEl = document.getElementById('pwa-banner-title');
+    const subEl = document.getElementById('pwa-banner-sub');
+    if (iconEl) iconEl.textContent = '💻';
+    if (titleEl) titleEl.textContent = 'Pasang DIS-NRW di Desktop / PC';
+    if (subEl) subEl.textContent = 'Buka langsung dari Taskbar, Desktop & Start Menu Windows';
+  }
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('PWA ServiceWorker terdaftar:', reg.scope))
+        .catch(err => console.log('PWA ServiceWorker gagal:', err));
+    });
+  }
+
+  // Tangkap event sebelum instalasi muncul (Desktop Chrome/Edge & Mobile Android)
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (!isStandalone && pwaBanner) {
+      pwaBanner.style.display = 'flex';
+    }
+  });
+
+  if (btnInstall) {
+    btnInstall.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          if (pwaBanner) pwaBanner.style.display = 'none';
+        }
+        deferredPrompt = null;
+      } else {
+        alert('Untuk menginstal di Desktop:\n1. Klik ikon [Instal DIS-NRW] di bilah alamat browser (URL bar sebelah kanan).\n2. Atau klik menu titik tiga (⋮) di browser ➔ pilih "Instal DIS-NRW".');
+      }
+    });
+  }
+
+  // Sembunyikan banner saat aplikasi berhasil dipasang
+  window.addEventListener('appinstalled', () => {
+    if (pwaBanner) pwaBanner.style.display = 'none';
+    deferredPrompt = null;
+  });
+
+  // Tampilkan tanggal hari ini
+  const now = new Date();
+  const opts = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+  document.getElementById('tanggal-hari-ini').textContent = new Intl.DateTimeFormat('id-ID', opts).format(now);
+
+  // Animasi card masuk
+  const cards = document.querySelectorAll('.job-card');
+  cards.forEach((card, i) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(16px)';
+    card.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+    setTimeout(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, 80 + i * 60);
+  });
+</script>
+
+</body>
+</html>
