@@ -32,6 +32,12 @@ const _MAP_SCALE_CONFIG = {
       p: "d3eb217cb037a34614a873111b1518f8e02d4493393fcff5ee02fb4da233ae66",
       name: "Petugas Distribusi"
     }
+    {
+      id: "node_04",
+      u: "a69ccc8aa8fc529fa63090f735fc5b6eae2bf9a686cb4de941cd38120cb0f796",
+      p: "966f68ec5a262a7253c1e14e8966b0b9db19ccb65d8a90a29a1445e7fe06bb70",
+      name: "Wandi Umar"
+    }
   ]
 };
 
