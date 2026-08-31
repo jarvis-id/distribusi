@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dis-nrw-v5';
+const CACHE_NAME = 'dis-nrw-v6';
 const ASSETS = [
   './',
   './index.html',
