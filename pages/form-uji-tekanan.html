@@ -90,18 +90,29 @@
 </div>
 
 <!-- MAP MODAL -->
-<div id="map-modal">
+<div id="map-modal" onclick="if(event.target===this) closeMap()">
   <div class="map-modal-inner">
-    <div style="position:relative;">
+    <div class="map-modal-header">
+      <div>
+        <div class="map-modal-title">📍 Tentukan Lokasi Manual</div>
+        <div class="map-modal-sub">Geser pin atau klik peta untuk menandai titik presisi</div>
+      </div>
+      <button type="button" class="btn-map-close" onclick="closeMap()" title="Tutup Peta">✖</button>
+    </div>
+    <div class="map-body-wrapper">
       <div id="map-container"></div>
       <div class="map-controls">
-        <button class="btn-locate" onclick="mapLocateMe()">🎯</button>
+        <button type="button" class="btn-locate" onclick="mapLocateMe()" title="Pusatkan ke Posisi GPS Saya">🎯</button>
       </div>
     </div>
     <div class="map-footer">
-      <span class="map-status" id="map-status">Klik peta untuk menandai lokasi</span>
-      <button class="btn-map-cancel" onclick="closeMap()">Batal</button>
-      <button class="btn-map-confirm" onclick="confirmMapLocation()">✅ Pilih Lokasi</button>
+      <div class="map-status-box">
+        <span class="map-status" id="map-status">Klik peta untuk menandai lokasi</span>
+      </div>
+      <div class="map-footer-btns">
+        <button type="button" class="btn-map-cancel" onclick="closeMap()">Batal</button>
+        <button type="button" class="btn-map-confirm" onclick="confirmMapLocation()">✅ Pilih Lokasi</button>
+      </div>
     </div>
   </div>
 </div>

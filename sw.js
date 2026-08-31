@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dis-nrw-v4';
+const CACHE_NAME = 'dis-nrw-v5';
 const ASSETS = [
   './',
   './index.html',
@@ -23,7 +23,8 @@ const ASSETS = [
   './pages/form-valve.html',
   './pages/print-preview.html',
   './pages/panduan.html',
-  './pages/privacy.html'
+  './pages/privacy.html',
+  './pages/pertanggungjawaban.html'
 ];
 
 self.addEventListener('install', e => {
