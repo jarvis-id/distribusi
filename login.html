@@ -392,7 +392,12 @@
       }
     } catch (err) {
       console.error('Error otentikasi:', err);
-      showAlert('❌ Terjadi kesalahan saat memverifikasi kredensial.', 'error');
+      // Tampilkan pesan error spesifik untuk memudahkan debug
+      let errDetail = '❌ Terjadi kesalahan sistem saat verifikasi.';
+      if (err && err.message) {
+        errDetail += ' (' + err.message + ')';
+      }
+      showAlert(errDetail, 'error');
       btn.disabled = false;
       btn.innerHTML = '<span>🚀 Masuk ke Sistem</span>';
     }
