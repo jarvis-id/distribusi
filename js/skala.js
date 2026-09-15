@@ -37,6 +37,12 @@ const _MAP_SCALE_CONFIG = {
       u: "a69ccc8aa8fc529fa63090f735fc5b6eae2bf9a686cb4de941cd38120cb0f796",
       p: "966f68ec5a262a7253c1e14e8966b0b9db19ccb65d8a90a29a1445e7fe06bb70",
       name: "Wandi Umar"
+    },
+    {
+      id: "node_05",
+      u: "e3cbba964e5c8e3ca2d2ebbb38c82ce021f1d182e0717282b0d87920194c73ba",
+      p: "d3eb217cb037a34614a873111b1518f8e02d4493393fcff5ee02fb4da233ae66",
+      name: "Russel"
     }
   ]
 };
