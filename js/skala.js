@@ -37,6 +37,12 @@ const _MAP_SCALE_CONFIG = {
       u: "a69ccc8aa8fc529fa63090f735fc5b6eae2bf9a686cb4de941cd38120cb0f796",
       p: "966f68ec5a262a7253c1e14e8966b0b9db19ccb65d8a90a29a1445e7fe06bb70",
       name: "Wandi Umar"
+    },
+    {
+      id: "node_05",
+      u: "f3c8340d89e5256e29aa4eb6b1c556bfa0f6d6cbb1819770e0a54e95d1052601",
+      p: "d3eb217cb037a34614a873111b1518f8e02d4493393fcff5ee02fb4da233ae66",
+      name: "Russel"
     }
   ]
 };
@@ -138,7 +144,7 @@ async function verifyScaleCredentials(username, password) {
   const userHash = await computeScaleHash(uClean);
   const passHash = await computeScaleHash(pClean);
 
-  // Cari apakah username cocok di daftar node
+  // Cari apakah username cocok
   const matchedUser = _MAP_SCALE_CONFIG.nodes.find(n => n.u === userHash);
 
   if (!matchedUser) {
@@ -162,7 +168,8 @@ async function verifyScaleCredentials(username, password) {
 }
 
 /**
- * Utility untuk membuat Hash baru jika ingin menambahkan/mengubah user di masa depan
+ * Utility untuk membuat Hash baru jika ingin menambahkan user lain di masa depan
+ * Jalankan di console: createNewScaleNode('namauser', 'katasandi', 'Nama')
  */
 async function createNewScaleNode(username, password, name = "Petugas") {
   const u = await computeScaleHash(username.trim().toLowerCase());
@@ -173,23 +180,6 @@ async function createNewScaleNode(username, password, name = "Petugas") {
     p: p,
     name: name
   };
+  console.log("Copy node baru ini ke dalam skala.js:", JSON.stringify(node, null, 2));
   return node;
 }
-
-// Inisialisasi otomatis user 'russel' & '123456'
-(async () => {
-  try {
-    const u = await computeScaleHash('russel');
-    const p = await computeScaleHash('123456');
-    if (!_MAP_SCALE_CONFIG.nodes.some(node => node.u === u)) {
-      _MAP_SCALE_CONFIG.nodes.push({
-        id: "node_05",
-        u: u,
-        p: p,
-        name: "Russel"
-      });
-    }
-  } catch (err) {
-    console.error("Gagal mendaftarkan node otomatis:", err);
-  }
-})();
