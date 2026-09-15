@@ -1,5 +1,5 @@
-// 1. Versi cache dinaikkan ke v7 agar browser & PWA di Android otomatis membuang cache lama
-const CACHE_NAME = 'dis-nrw-v7';
+// 1. Versi cache dinaikkan ke v8 agar browser & PWA di Android otomatis membuang cache lama
+const CACHE_NAME = 'dis-nrw-v8';
 
 const ASSETS = [
   './',
