@@ -1,4 +1,6 @@
-const CACHE_NAME = 'dis-nrw-v6';
+// 1. Versi cache dinaikkan ke v7 agar browser & PWA di Android otomatis membuang cache lama
+const CACHE_NAME = 'dis-nrw-v7';
+
 const ASSETS = [
   './',
   './index.html',
@@ -27,6 +29,7 @@ const ASSETS = [
   './pages/pertanggungjawaban.html'
 ];
 
+// 2. Install: Langsung download semua asset baru dan paksa aktif (skipWaiting)
 self.addEventListener('install', e => {
   self.skipWaiting();
   e.waitUntil(
@@ -36,26 +39,39 @@ self.addEventListener('install', e => {
   );
 });
 
+// 3. Activate: Hapus cache v6 dan versi lama lainnya, lalu ambil kendali klien (clients.claim)
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
-        keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))
+        keys.filter(k => k !== CACHE_NAME).map(k => {
+          console.log('Menghapus cache lawas:', k);
+          return caches.delete(k);
+        })
       );
     }).then(() => self.clients.claim())
   );
 });
 
+// 4. Fetch: Strategi Stale-While-Revalidate untuk script (update di background) & Cache First untuk asset
 self.addEventListener('fetch', e => {
-  // Hanya tangani GET requests
   if (e.request.method !== 'GET') return;
-  
+
   e.respondWith(
     caches.match(e.request).then(cached => {
-      if (cached) return cached;
-      return fetch(e.request).then(networkResponse => {
+      // Ambil versi terbaru dari jaringan untuk memperbarui cache
+      const networkFetch = fetch(e.request).then(networkResponse => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(e.request, responseClone);
+          });
+        }
         return networkResponse;
       }).catch(() => cached);
+
+      // Kembalikan cache yang ada terlebih dahulu jika offline/tersedia
+      return cached || networkFetch;
     })
   );
 });
